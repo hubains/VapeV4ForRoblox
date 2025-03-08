@@ -11,7 +11,7 @@ end
 local function downloadFile(path, func)
 	if not isfile(path) then
 		local suc, res = pcall(function()
-			return game:HttpGet('https://raw.githubusercontent.com/hubains/VapeV4ForRoblox/'..readfile('newvape/profiles/commit.txt')..'/'..select(1, path:gsub('newvape/', '')), true)
+			return game:HttpGet('https://raw.githubusercontent.com/hubains/VapeV4ForRoblox/'..readfile('newvape/profiles/main')..'/'..select(1, path:gsub('newvape/', '')), true)
 		end)
 		if not suc or res == '404: Not Found' then
 			error(res)
@@ -47,13 +47,13 @@ if not shared.VapeDeveloper then
 	local commit = subbed:find('currentOid')
 	commit = commit and subbed:sub(commit + 13, commit + 52) or nil
 	commit = commit and #commit == 40 and commit or 'main'
-	if commit == 'main' or (isfile('newvape/profiles/commit.txt') and readfile('newvape/profiles/commit.txt') or '') ~= commit then
+	if commit == 'main' or (isfile('newvape/profiles/main') and readfile('newvape/profiles/main') or '') ~= commit then
 		wipeFolder('newvape')
 		wipeFolder('newvape/games')
 		wipeFolder('newvape/guis')
 		wipeFolder('newvape/libraries')
 	end
-	writefile('newvape/profiles/commit.txt', commit)
+	writefile('newvape/profiles/main', commit)
 end
 
 return loadstring(downloadFile('newvape/main.lua'), 'main')()
